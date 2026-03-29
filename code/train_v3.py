@@ -8,7 +8,7 @@ import random
 # ==========================================
 # 1. CONFIGURATION
 # ==========================================
-DATASET_FILE = "compiled_cops_and_robbers.pt"
+DATASET_FILE = "compiled_cops_and_robbers_v3.pt"
 BATCH_SIZE = 64
 EPOCHS = 100
 LEARNING_RATE = 0.001
@@ -97,7 +97,7 @@ def train():
     class_weights = torch.tensor(weights, dtype=torch.float).to(device)
 
     # Initialize Model, Optimizer, and Loss Function
-    model = CopNet(num_node_features=1, hidden_channels=HIDDEN_CHANNELS, num_classes=3).to(device)
+    model = CopNet(num_node_features=3, hidden_channels=HIDDEN_CHANNELS, num_classes=3).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
     criterion = torch.nn.CrossEntropyLoss(weight=class_weights)
 
@@ -146,8 +146,8 @@ def train():
     print("Training Complete!")
     
     # Save the trained model weights
-    torch.save(model.state_dict(), "copnet_weights.pth")
-    print("Model weights saved to 'copnet_weights.pth'")
+    torch.save(model.state_dict(), "copnet_weights_v3.pth")
+    print("Model weights saved to 'copnet_weights_v3.pth'")
 
 if __name__ == "__main__":
     train()
